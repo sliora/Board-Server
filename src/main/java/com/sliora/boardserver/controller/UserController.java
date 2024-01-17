@@ -1,5 +1,6 @@
 package com.sliora.boardserver.controller;
 
+import com.sliora.boardserver.aop.LoginCheck;
 import com.sliora.boardserver.dto.*;
 import com.sliora.boardserver.service.impl.UserServiceImpl;
 import com.sliora.boardserver.utils.SessionUtil;
@@ -69,6 +70,7 @@ public class UserController {
     }
 
     @PatchMapping("password")
+    @LoginCheck(type = LoginCheck.UserType.USER)
     public ResponseEntity<LoginResponse> updateUserPassword(@RequestBody UserUpdatePasswordRequest userUpdatePasswordRequest,
                                                             HttpSession session) {
         ResponseEntity<LoginResponse> responseEntity = null;
